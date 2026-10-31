@@ -1,0 +1,14 @@
+name: Unzip
+on: [push]
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: unzip dok-dak.zip -d . && rm dok-dak.zip
+      - run: |
+          git config user.name "bot"
+          git config user.email "bot@bot.com"
+          git add .
+          git commit -m "extract files" || true
+          git push
